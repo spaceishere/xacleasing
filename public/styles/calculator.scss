@@ -1,0 +1,123 @@
+.input-with-slider {
+  margin: 2.5rem 0 2rem;
+
+  label {
+    color: $purple;
+  }
+
+  .ant-input-number {
+    background: transparent;
+    border: none;
+    width: initial;
+
+    input {
+      text-align: right;
+      font-weight: 600;
+      color: $purple;
+    }
+  }
+
+  .ant-slider {
+    margin: 0;
+    padding: 0;
+
+    .ant-slider-rail {
+      background: $purple;
+      height: 1px;
+      border: none;
+    }
+
+    .ant-slider-track {
+      background: $purple;
+      height: 2px;
+    }
+
+    .ant-slider-step {
+      height: 0px;
+    }
+
+    .ant-slider-handle {
+      width: 20px;
+      height: 20px;
+      background: $purple;
+      border: 1px solid #fff;
+      margin-top: -9px;
+      background-image: url("../images/white-logo.png");
+      background-size: contain;
+      background-position: center;
+
+      &:focus {
+        border-color: rgba(74, 30, 75, 0.6);
+        outline: none;
+        // box-shadow: 0 0 0 5px rgb(74 30 75 / 12%);
+      }
+    }
+
+    &:hover .ant-slider-handle:not(.ant-tooltip-open) {
+      border-color: rgba(74, 30, 75, 0.6);
+    }
+  }
+}
+
+.result-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 16%;
+
+  .monthlyPayment {
+    text-align: left;
+    color: $purple;
+    width: 100%;
+
+    .ant-statistic-title {
+      font-size: 18px;
+      display: block;
+      color: $text-color;
+      margin-bottom: -1rem;
+    }
+
+    .ant-statistic-content {
+      text-align: left;
+      color: $purple;
+      padding-top: 0.5rem;
+      font-weight: 400;
+    }
+
+    .more-btn {
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      margin-top: 1rem;
+      color: $text-color;
+      font-weight: 300;
+      justify-content: center;
+      box-shadow: inset 0 0 3px 1px rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    .lease-amount .ant-statistic-content {
+      display: flex;
+      font-size: 3rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      padding-top: 8px;
+      font-weight: 300;
+      font-family: "helveticaneue", sans-serif;
+    }
+    .month-amount .ant-statistic-content {
+      font-family: "helveticaneue", sans-serif;
+    }
+  }
+}
+
+.ant-table .ant-statistic-content {
+  font-size: 14px;
+}
+
+.ant-modal-body .ant-table-content table {
+  border-spacing: 0;
+}
+
+.ant-modal-content .ant-table-pagination button {
+  margin-top: auto;
+}

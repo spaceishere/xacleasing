@@ -1,0 +1,52 @@
+{
+  "name": "xacleasing",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "lint": "eslint --ext .js,.js .",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@zeit/next-css": "^1.0.1",
+    "antd": "^4.15.0",
+    "axios": "^0.21.1",
+    "emailjs-com": "^2.6.4",
+    "express": "^4.17.1",
+    "google-map-react": "^2.1.9",
+    "i18n-react": "^0.7.0",
+    "moment": "^2.24.0",
+    "next": "^12.1.0",
+    "next-routes": "^1.4.2",
+    "next-translate": "^1.3.4",
+    "nprogress": "^0.2.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.2",
+    "react-messenger-customer-chat": "^0.8.0",
+    "react-moment": "^0.9.7",
+    "react-page-scroller": "^2.1.0",
+    "react-reveal": "^1.2.2",
+    "react-scripts": "3.4.1",
+    "react-share": "^4.4.0",
+    "react-slick": "^0.28.1",
+    "react-youtube": "^7.13.1",
+    "styled-components": "^5.2.3",
+    "wpapi": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "normalize.css": "^8.0.1",
+    "prettier": ">= 1.13.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

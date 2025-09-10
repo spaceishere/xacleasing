@@ -1,0 +1,158 @@
+.measurement-wrapper {
+  position: relative;
+
+  .circle {
+    filter: invert(80%);
+    width: 80%;
+  }
+
+  .dot {
+    position: absolute;
+    width: 40px;
+    bottom: 23%;
+    left: calc(50% - 20px);
+  }
+
+  ul {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    &>li {
+      position: absolute;
+      list-style: none;
+      font-weight: bold;
+      opacity: 0.8;
+      font-size: 12px;
+
+      &:nth-child(1) {
+        left: 21%;
+        top: 100%;
+      }
+
+      &:nth-child(2) {
+        left: 16%;
+        top: 70%;
+      }
+
+      &:nth-child(3) {
+        left: 20%;
+        top: 40%;
+      }
+
+      &:nth-child(4) {
+        left: 30%;
+        top: 20%;
+      }
+
+      &:nth-child(5) {
+        left: 46%;
+        top: 10%;
+      }
+
+      &:nth-child(6) {
+        right: 30%;
+        top: 20%;
+      }
+
+      &:nth-child(7) {
+        right: 20%;
+        top: 40%;
+      }
+
+      &:nth-child(8) {
+        right: 16%;
+        top: 70%;
+      }
+
+      &:nth-child(9) {
+        right: 21%;
+        top: 100%;
+      }
+    }
+  }
+
+  &:hover .needle-wrapper .needle {
+    animation: swing 0.6s infinite;
+  }
+}
+
+.contentSection,
+.post-detail {
+  ul {
+    padding: 0;
+    list-style: none;
+
+    &>li {
+      position: relative;
+      margin-left: 1rem;
+
+      &:before {
+        content: "";
+        background-image: url("/../../images/arrow.png");
+        position: absolute;
+        left: -1rem;
+        background-size: 8px;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 100%;
+        top: 4px;
+      }
+    }
+  }
+}
+
+.dark .measurement-wrapper {
+  color: #fff;
+
+  ul>li,
+  h4,
+  div {
+    color: #fff;
+  }
+}
+
+
+.needle-wrapper {
+  position: absolute;
+  right: calc(50% - 2px);
+  bottom: 32%;
+  animation: 10s cubic-bezier(.8, 0, .2, 1);
+  transform-origin: bottom right;
+  // transform: rotate(90deg);
+
+
+  .needle {
+    max-width: 113px;
+    transition: transform 1s linear;
+    transform-origin: bottom right;
+    transform-style: preserve-3D;
+  }
+}
+
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes rotate-needle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(120deg);
+  }
+}

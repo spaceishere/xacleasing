@@ -1,0 +1,330 @@
+@font-face {
+  font-family: "helveticaneue";
+  src: url("../fonts/HelveticaNeueforXac-Lt.eot");
+  src: url("../fonts/HelveticaNeueforXac-Lt.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/HelveticaNeueforXac-Lt.woff") format("woff"),
+    url("../fonts/HelveticaNeueforXac-Lt.ttf") format("truetype"),
+    url("../fonts/HelveticaNeueforXac-Lt.svg#HelveticaNeueforXac-Lt")
+      format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "helveticaneue";
+  src: url("../fonts/HelveticaNeueforXac-Md.eot");
+  src: url("../fonts/HelveticaNeueforXac-Md.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/HelveticaNeueforXac-Md.woff") format("woff"),
+    url("../fonts/HelveticaNeueforXac-Md.ttf") format("truetype"),
+    url("../fonts/HelveticaNeueforXac-Md.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "helveticaneue";
+  font-weight: 600;
+  src: url("../fonts/HelveticaNeueforXac-Bd.eot");
+  src: url("../fonts/HelveticaNeueforXac-Bd.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/HelveticaNeueforXac-Bd.woff") format("woff"),
+    url("../fonts/HelveticaNeueforXac-Bd.ttf") format("truetype"),
+    url("../fonts/HelveticaNeueforXac-Bd.svg") format("svg");
+}
+
+.toolbar {
+  position: fixed;
+  right: 3rem;
+  width: 50px;
+  top: 40%;
+  z-index: 1000;
+  border: 1px solid #000000;
+  border-radius: 4px;
+
+  div {
+    .icon {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 1);
+      color: #000000;
+      cursor: pointer;
+      @include transition(background 2s ease-in-out);
+      border-radius: 0 !important;
+      line-height: initial;
+    }
+
+    &:last-child a .icon {
+      border-bottom: none;
+    }
+  }
+}
+
+.ant-tooltip-inner {
+  border-radius: 4px;
+  padding-top: 8px;
+}
+
+.notFound {
+  display: grid;
+  place-items: center;
+  color: $purple;
+
+  h3 {
+    margin-top: 1rem;
+  }
+
+  button {
+    border: none;
+    background-color: $purple;
+    opacity: 0.8;
+    @include transition(all 0.4s ease-in-out);
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+      color: white;
+      background-color: #4a1e4b;
+    }
+  }
+}
+
+.component.center {
+  justify-content: center;
+  align-items: center;
+}
+
+//loader
+#nprogress {
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.08);
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+
+  .bar {
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 50px;
+    height: 50px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(246, 146, 71, 0.4);
+      border-radius: 50%;
+      border-top: 3px solid rgba(246, 146, 71, 0.8);
+      -webkit-animation: nprogress-spinner 800ms ease-in-out infinite;
+      animation: nprogress-spinner 800ms ease-in-out infinite;
+    }
+  }
+
+  .spinner-icon {
+    background-image: url("../images/xac-icon.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    margin: 10px auto;
+  }
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  40% {
+    -webkit-transform: rotate(60deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(60deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.career-item {
+  p {
+    opacity: 0.8;
+  }
+
+  a {
+    color: $purple;
+    padding: 0;
+  }
+}
+
+.box {
+  .img-48 {
+    border-radius: 4px;
+    height: 60px;
+    // border: 1px solid rgba(0, 0, 0, 0.3);
+    // background-color: rgba(0, 0, 0, 0.2);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+      max-height: 80%;
+      max-width: 80%;
+      object-fit: contain;
+    }
+  }
+
+  .w3eden {
+    .media-body .wpdm_icon {
+      // display: none;
+    }
+
+    .download-on-click {
+      @include transition(all 0.3s ease-in-out);
+    }
+
+    .download-on-click:hover {
+      opacity: 0.9;
+      padding-left: 4px;
+    }
+
+    .package-title {
+      font-weight: 300;
+      margin-top: 1rem;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    a {
+      color: $text-color;
+      font-weight: 500;
+    }
+  }
+}
+
+.single-result {
+  h3 {
+    @include transition(all 0.3s ease-in-out);
+
+    &:hover {
+      color: $purple;
+      cursor: pointer;
+    }
+  }
+
+  &:hover a,
+  &:hover {
+    color: #000;
+  }
+}
+
+.about-img {
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+.branch-item {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+  .ant-image {
+    float: left;
+    width: 30%;
+    margin-right: 1.2rem;
+
+    .branch-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      height: 200px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    display: grid;
+
+    h3 {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    > li {
+      position: relative;
+      padding-left: 2rem;
+
+      .anticon {
+        position: absolute;
+        left: 0;
+        color: $orange;
+        font-size: 18px;
+      }
+
+      ul li {
+        padding-left: 0;
+      }
+    }
+  }
+}
+.fb_dialog {
+  .fb_dialog_content{
+    iframe{
+      // bottom: 70px !important;
+      right: 10px !important;
+    }
+  }
+}
