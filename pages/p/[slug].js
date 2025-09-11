@@ -13,6 +13,7 @@ const Pages = ({ page, posts, loading, mainMenu, stickyMenu }) => {
   if (!page) {
     return <Error statusCode={404} />;
   }
+
   useEffect(() => {
     if (page?.acf?.id) {
       window.erxesSettings = {
@@ -54,7 +55,7 @@ const Pages = ({ page, posts, loading, mainMenu, stickyMenu }) => {
       return (
         <div className="page-wrapper p-3 w-100">
           <h2 className="mb-2 upper-case title" dangerouslySetInnerHTML={{ __html: regex(page.title.rendered) }} />
-          <Contact branches={posts} />
+          <Contact />
         </div>
       );
     }
@@ -173,13 +174,13 @@ export async function getStaticPaths(context) {
         })
         .flat(),
 
-      fallback: false,
+      fallback: "blocking",
     };
   } catch (error) {
     console.error("Error in getStaticPaths:", error);
     return {
       paths: [],
-      fallback: false,
+      fallback: "blocking",
     };
   }
 }

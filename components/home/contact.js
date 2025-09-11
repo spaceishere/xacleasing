@@ -13,14 +13,11 @@ const Contact = ({ branchList, graphqlBranches = null, graphqlLoading = false, g
 
   const renderBranch = (branch) => {
     console.log("Branch:", branch);
-    // GraphQL болон WordPress өгөгдлийн format ялгаатай
     const branchTitle = branch.title?.rendered || branch.title || "";
 
-    // Custom fields data handling
     const customData = branch.customFieldsData || {};
     const acfData = branch.acf || {};
 
-    // Safe access to customFieldsData array
     const customFields = Array.isArray(branch.customFieldsData) ? branch.customFieldsData : [];
     const address = customFields[0]?.value || branch.content?.rendered || branch.content || "";
     const time = customFields[1]?.value || "";
@@ -55,7 +52,6 @@ const Contact = ({ branchList, graphqlBranches = null, graphqlLoading = false, g
 
   const renderContent = () => {
     if (branchList) {
-      // GraphQL болон WordPress өгөгдөл ашиглах
       const branchesToRender = graphqlBranches || [];
 
       if (!branchesToRender.length && !graphqlLoading) {
@@ -117,9 +113,12 @@ const Contact = ({ branchList, graphqlBranches = null, graphqlLoading = false, g
 
   return (
     <>
-      <div className="w-100 map index-map">
-        <GoogleMap items={mapItems} />
-      </div>
+      {/* Google Map зөвхөн салбарын жагсаалт байх үед л харуулна */}
+      {branchList && (
+        <div className="w-100 map index-map">
+          <GoogleMap items={mapItems} />
+        </div>
+      )}
       {renderContent()}
     </>
   );
