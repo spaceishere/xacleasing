@@ -52,6 +52,19 @@ const MyLink = ({ className, icon, title, type, slug, url, prefetch }) => {
       slug?.includes("vendor") ||
       slug?.includes("supplier"));
 
+  // Check for leasing product pages
+  const isNewCarLeasingLink = title === "Шинэ автомашины лизинг" || slug === "new-car-leasing" || title === "ШИНЭ АВТОМАШИНЫ ЛИЗИНГ";
+
+  const isMachineryLeasingLink = title === "Машин механизмын лизинг" || slug === "machinery-leasing" || title === "МАШИН МЕХАНИЗМЫН ЛИЗИНГ";
+
+  const isManufacturingEquipmentLeasingLink =
+    title === "Үйлдвэрлэлийн тоног төхөөрөмжийн лизинг" ||
+    slug === "manufacturing-equipment-leasing" ||
+    title === "ҮЙЛДВЭРЛЭЛИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ЛИЗИНГ";
+
+  const isMedicalEquipmentLeasingLink =
+    title === "Эмнэлэгийн тоног төхөөрөмжийн лизинг" || slug === "medical-equipment-leasing" || title === "ЭМНЭЛЭГИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ЛИЗИНГ";
+
   return (
     <Link
       href={
@@ -69,15 +82,23 @@ const MyLink = ({ className, icon, title, type, slug, url, prefetch }) => {
                     ? generateLink(`/about-group`)
                     : isNewCarVendorsLink
                       ? generateLink(`/new-car-vendors`)
-                      : type === "about"
-                        ? generateLink(`/about`)
-                        : type === "career"
-                          ? generateLink(`/career/hr`)
-                          : type === "career-detail"
-                            ? generateLink(`/career/` + slug)
-                            : type != "custom"
-                              ? generateLink(`/${type}/[slug]`)
-                              : url
+                      : isNewCarLeasingLink
+                        ? generateLink(`/new-car-leasing`)
+                        : isMachineryLeasingLink
+                          ? generateLink(`/machinery-leasing`)
+                          : isManufacturingEquipmentLeasingLink
+                            ? generateLink(`/manufacturing-equipment-leasing`)
+                            : isMedicalEquipmentLeasingLink
+                              ? generateLink(`/medical-equipment-leasing`)
+                              : type === "about"
+                                ? generateLink(`/about`)
+                                : type === "career"
+                                  ? generateLink(`/career/hr`)
+                                  : type === "career-detail"
+                                    ? generateLink(`/career/` + slug)
+                                    : type != "custom"
+                                      ? generateLink(`/${type}/[slug]`)
+                                      : url
       }
       as={
         isHowToBecomeVendorLink
@@ -94,15 +115,23 @@ const MyLink = ({ className, icon, title, type, slug, url, prefetch }) => {
                     ? generateLink(`/about-group`)
                     : isNewCarVendorsLink
                       ? generateLink(`/new-car-vendors`)
-                      : type === "about"
-                        ? generateLink(`/about`)
-                        : type === "career"
-                          ? generateLink(`/career/hr`)
-                          : type === "career-detail"
-                            ? generateLink(`/career/` + slug)
-                            : type != "custom"
-                              ? generateLink(`/${type}/` + slug)
-                              : url
+                      : isNewCarLeasingLink
+                        ? generateLink(`/new-car-leasing`)
+                        : isMachineryLeasingLink
+                          ? generateLink(`/machinery-leasing`)
+                          : isManufacturingEquipmentLeasingLink
+                            ? generateLink(`/manufacturing-equipment-leasing`)
+                            : isMedicalEquipmentLeasingLink
+                              ? generateLink(`/medical-equipment-leasing`)
+                              : type === "about"
+                                ? generateLink(`/about`)
+                                : type === "career"
+                                  ? generateLink(`/career/hr`)
+                                  : type === "career-detail"
+                                    ? generateLink(`/career/` + slug)
+                                    : type != "custom"
+                                      ? generateLink(`/${type}/` + slug)
+                                      : url
       }
       passHref
     >

@@ -273,6 +273,64 @@ const PostDetail = ({ category, post, loading, mainMenu, stickyMenu }) => {
 
 PostDetail.getInitialProps = async (context) => {
   const slug = context.query.slug;
+
+  // Redirect specific slugs to static pages
+  if (slug === "new-car-leasing") {
+    if (context.res) {
+      context.res.writeHead(301, { Location: "/new-car-leasing" });
+      context.res.end();
+      return {};
+    } else {
+      // Client-side redirect
+      if (typeof window !== "undefined") {
+        window.location.href = "/new-car-leasing";
+        return {};
+      }
+    }
+  }
+
+  if (slug === "machinery-leasing") {
+    if (context.res) {
+      context.res.writeHead(301, { Location: "/machinery-leasing" });
+      context.res.end();
+      return {};
+    } else {
+      // Client-side redirect
+      if (typeof window !== "undefined") {
+        window.location.href = "/machinery-leasing";
+        return {};
+      }
+    }
+  }
+
+  if (slug === "manufacturing-equipment-leasing") {
+    if (context.res) {
+      context.res.writeHead(301, { Location: "/manufacturing-equipment-leasing" });
+      context.res.end();
+      return {};
+    } else {
+      // Client-side redirect
+      if (typeof window !== "undefined") {
+        window.location.href = "/manufacturing-equipment-leasing";
+        return {};
+      }
+    }
+  }
+
+  if (slug === "medical-equipment-leasing") {
+    if (context.res) {
+      context.res.writeHead(301, { Location: "/medical-equipment-leasing" });
+      context.res.end();
+      return {};
+    } else {
+      // Client-side redirect
+      if (typeof window !== "undefined") {
+        window.location.href = "/medical-equipment-leasing";
+        return {};
+      }
+    }
+  }
+
   const wp = new WPAPI({ endpoint: config(context).apiUrl });
 
   const apiMethod = wp.posts();

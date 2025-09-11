@@ -56,9 +56,66 @@ function MyApp({ Component, pageProps, lang, mainMenu, stickyMenu }) {
 
 MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  const mainMenu = (await fetcher(`${config(appContext.ctx.locale).apiUrl}/menus/v1/menus/main-menu`)) || { items: [] }; // Provide fallback
+  let mainMenu = (await fetcher(`${config(appContext.ctx.locale).apiUrl}/menus/v1/menus/main-menu`)) || { items: [] }; // Provide fallback
 
   const stickyMenu = (await fetcher(`${config(appContext.ctx.locale).apiUrl}/menus/v1/menus/toolbar-menu`)) || { items: [] }; // Provide fallback
+
+  // Add static leasing pages to the menu if they don't exist
+  const staticLeasingPages = [
+    {
+      ID: 9001,
+      title: "Шинэ автомашины лизинг",
+      slug: "new-car-leasing",
+      url: "/new-car-leasing",
+      object: "page",
+    },
+    {
+      ID: 9002,
+      title: "Машин механизмын лизинг",
+      slug: "machinery-leasing",
+      url: "/machinery-leasing",
+      object: "page",
+    },
+    {
+      ID: 9003,
+      title: "Үйлдвэрлэлийн тоног төхөөрөмжийн лизинг",
+      slug: "manufacturing-equipment-leasing",
+      url: "/manufacturing-equipment-leasing",
+      object: "page",
+    },
+    {
+      ID: 9004,
+      title: "Эмнэлэгийн тоног төхөөрөмжийн лизинг",
+      slug: "medical-equipment-leasing",
+      url: "/medical-equipment-leasing",
+      object: "page",
+    },
+  ];
+
+  // Find "Бүтээгдэхүүн үйлчилгээ" menu item and add leasing pages as children
+  if (mainMenu.items && mainMenu.items.length > 0) {
+    const productServiceItem = mainMenu.items.find(
+      (item) =>
+        item.title === "Бүтээгдэхүүн үйлчилгээ" ||
+        item.title === "Products & Services" ||
+        item.title.includes("Бүтээгдэхүүн") ||
+        item.title.includes("Product")
+    );
+
+    if (productServiceItem) {
+      if (!productServiceItem.child_items) {
+        productServiceItem.child_items = [];
+      }
+
+      // Add static leasing pages to existing child items
+      staticLeasingPages.forEach((page) => {
+        const exists = productServiceItem.child_items.some((child) => child.slug === page.slug || child.title === page.title);
+        if (!exists) {
+          productServiceItem.child_items.push(page);
+        }
+      });
+    }
+  }
 
   const appProps = await App.getInitialProps(appContext);
 
