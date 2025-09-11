@@ -324,59 +324,98 @@ const Cat = ({ category, categories, childCategories, parentPost, posts, loading
 };
 
 export async function getStaticProps(context) {
-  const wp = new WPAPI({ endpoint: config(context).apiUrl });
-  const slug = context.params?.slug;
-  const category = await wp
-    .categories()
-    .slug(slug)
-    .embed()
-    .then((data) => {
-      return data[0];
-    });
+  try {
+    const wp = new WPAPI({ endpoint: config(context).apiUrl });
+    const slug = context.params?.slug;
 
-  const posts = await wp
-    .posts()
-    .categories(category.id || "")
-    .perPage(100)
-    .embed();
+    const category = await wp
+      .categories()
+      .slug(slug)
+      .embed()
+      .then((data) => {
+        return data[0];
+      })
+      .catch((error) => {
+        console.error(`Error fetching category ${slug}:`, error);
+        return null;
+      });
 
-  const categories = await wp
-    .categories()
-    .parent(category.parent || "")
-    .embed();
+    if (!category) {
+      return {
+        notFound: true,
+      };
+    }
 
-  const childCategories = await wp
-    .categories()
-    .parent(category.id || "")
-    .embed();
+    const [posts, categories, childCategories, parentPost] = await Promise.allSettled([
+      wp
+        .posts()
+        .categories(category.id || "")
+        .perPage(100)
+        .embed(),
+      wp
+        .categories()
+        .parent(category.parent || "")
+        .embed(),
+      wp
+        .categories()
+        .parent(category.id || "")
+        .embed(),
+      wp
+        .posts()
+        .categories(category.parent || "")
+        .perPage(100)
+        .embed(),
+    ]);
 
-  const parentPost = await wp
-    .posts()
-    .categories(category.parent || "")
-    .perPage(100)
-    .embed();
-
-  return {
-    props: { category, categories, childCategories, parentPost, posts },
-    revalidate: 300,
-  };
+    return {
+      props: {
+        category,
+        categories: categories.status === "fulfilled" ? categories.value : [],
+        childCategories: childCategories.status === "fulfilled" ? childCategories.value : [],
+        parentPost: parentPost.status === "fulfilled" ? parentPost.value : [],
+        posts: posts.status === "fulfilled" ? posts.value : [],
+      },
+      revalidate: 300,
+    };
+  } catch (error) {
+    console.error(`Error in getStaticProps for ${context.params?.slug}:`, error);
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export async function getStaticPaths(context) {
-  const wp = new WPAPI({ endpoint: config(context).apiUrl });
+  try {
+    const wp = new WPAPI({ endpoint: config(context).apiUrl });
 
-  const cats = await wp.categories().embed().perPage(40);
-  return {
-    paths: context.locales
-      .map((locale) => {
-        return cats.map((cat) => {
-          return { params: { slug: cat.slug }, locale };
-        });
-      })
-      .flat(),
+    const cats = await wp
+      .categories()
+      .embed()
+      .perPage(40)
+      .catch((error) => {
+        console.error("Error fetching categories for static paths:", error);
+        return [];
+      });
 
-    fallback: false,
-  };
+    return {
+      paths: context.locales
+        .map((locale) => {
+          return cats.map((cat) => {
+            return { params: { slug: cat.slug }, locale };
+          });
+        })
+        .flat(),
+
+      fallback: "blocking",
+    };
+  } catch (error) {
+    console.error("Error in getStaticPaths:", error);
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
 }
 
 export default Cat;
