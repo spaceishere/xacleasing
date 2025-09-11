@@ -23,7 +23,20 @@ function ProductList({ products }) {
     ],
   };
 
-  if (!products || products.length === 0) return null;
+  if (!products || products.length === 0) {
+    return (
+      <Row justify="center" className="w-100 relative" gutter={[48, 0]}>
+        <Col xs={22} sm={22} md={20} lg={18} xl={16}>
+          <div style={{ textAlign: "center", padding: "4rem 2rem" }}>
+            <h2 className="title pb-2 purple">{t("БҮТЭЭГДЭХҮҮН ҮЙЛЧИЛГЭЭ")}</h2>
+            <p style={{ fontSize: "1.1rem", opacity: 0.7, marginTop: "2rem" }}>
+              {t("Бидний бүтээгдэхүүн, үйлчилгээний мэдээлэл удахгүй энд харагдах болно")}
+            </p>
+          </div>
+        </Col>
+      </Row>
+    );
+  }
 
   return (
     <Row justify="center" className="w-100 relative" gutter={[48, 0]}>

@@ -19,10 +19,7 @@ const Sliders = ({ posts, sliderCategory }) => {
     <Row className="mb-2" justify="space-between">
       <Col>
         <h2>
-          {pre_payment.first_value &&
-            pre_payment.first_value != 0 &&
-            pre_payment.first_value + " -"}{" "}
-          {pre_payment.second_value}%
+          {pre_payment.first_value && pre_payment.first_value != 0 && pre_payment.first_value + " -"} {pre_payment.second_value}%
         </h2>
         {t("Урьдчилгаа")}
       </Col>
@@ -50,9 +47,7 @@ const Sliders = ({ posts, sliderCategory }) => {
   const renderBtn = (acf) => (
     <div className="d-flex">
       {renderBtnItem(acf.btn.slug, acf.btn.btn_text)}
-      {acf.footer_btn &&
-        acf.footer_btn.btn_text &&
-        renderBtnItem(acf.footer_btn.btn_id, acf.footer_btn.btn_text)}
+      {acf.footer_btn && acf.footer_btn.btn_text && renderBtnItem(acf.footer_btn.btn_id, acf.footer_btn.btn_text)}
     </div>
   );
 
@@ -63,23 +58,12 @@ const Sliders = ({ posts, sliderCategory }) => {
       <div key={post.id} className="h-100">
         <div
           className="h-100 w-100 img p-relative back-cover"
-          style={{ backgroundImage: `url(${img})` }}
+          style={{ backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfCBQAq4fDkjizcfZGBW_6ir3gL4Kd8b_3fA&s")` }}
         >
-          <Row
-            justify="center"
-            align="middle"
-            className="h-100"
-            gutter={[48, 0]}
-          >
+          <Row justify="center" align="middle" className="h-100" gutter={[48, 0]}>
             <Col xs={22} sm={22} md={20} lg={18} xl={16}>
               <Col sm={20} md={18} lg={14} xl={12}>
-                <div
-                  className={
-                    post.acf.backColor
-                      ? "slider-descr slider-back"
-                      : "slider-descr"
-                  }
-                >
+                <div className={post.acf.backColor ? "slider-descr slider-back" : "slider-descr"}>
                   {post.acf?.btn?.btn_text && renderBtn(post.acf)}
                   <h1>{regex(post.title.rendered)}</h1>
                   <div
@@ -91,17 +75,8 @@ const Sliders = ({ posts, sliderCategory }) => {
                   {post.acf?.pre_payment &&
                     post.acf?.interest_rate &&
                     post.acf?.period &&
-                    renderACF(
-                      post.acf.pre_payment,
-                      post.acf.interest_rate,
-                      post.acf.period
-                    )}
-                  <MyLink
-                    title={t("Дэлгэрэнгүй")}
-                    slug={post.slug}
-                    type="d"
-                    className="more-link"
-                  />
+                    renderACF(post.acf.pre_payment, post.acf.interest_rate, post.acf.period)}
+                  <MyLink title={t("Дэлгэрэнгүй")} slug={post.slug} type="d" className="more-link" />
                 </div>
               </Col>
             </Col>
@@ -111,7 +86,23 @@ const Sliders = ({ posts, sliderCategory }) => {
     );
   };
 
-  if (!posts || posts.length === 0) return null;
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="home-slider" style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Row justify="center" align="middle" className="w-100">
+          <Col xs={22} sm={22} md={20} lg={18} xl={16}>
+            <div style={{ textAlign: "center", padding: "4rem 2rem" }}>
+              <h1 style={{ fontSize: "3rem", marginBottom: "2rem", color: "#4a1e4b" }}>{t("ХасЛизинг")}</h1>
+              <h2 style={{ fontSize: "1.5rem", marginBottom: "2rem", opacity: 0.8 }}>{t("Таны найдвартай лизингийн түнш")}</h2>
+              <p style={{ fontSize: "1.1rem", opacity: 0.7, maxWidth: "600px", margin: "0 auto" }}>
+                {t("Автомашин, машин механизм, тоног төхөөрөмжийн лизингээр таны бизнесийг дэмжинэ")}
+              </p>
+            </div>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
 
   const settings1 = {
     className: "home-slider",
@@ -149,12 +140,7 @@ const Sliders = ({ posts, sliderCategory }) => {
           <div key="youtube" className="h-100 youtube">
             <div className="video-wrap">
               <div className="video-background">
-                <YouTube
-                  className="video-iframe"
-                  containerClassName="w-100"
-                  videoId={sliderCategory.acf.youtube_id}
-                  opts={opts}
-                />
+                <YouTube className="video-iframe" containerClassName="w-100" videoId={sliderCategory.acf.youtube_id} opts={opts} />
               </div>
             </div>
           </div>
@@ -162,25 +148,13 @@ const Sliders = ({ posts, sliderCategory }) => {
       </Slider>
 
       <div className="footer-content index">
-        <Row
-          justify="end"
-          align="middle"
-          className="w-100 footer-content index"
-        >
+        <Row justify="end" align="middle" className="w-100 footer-content index">
           <Col xs={20} sm={20} md={4} lg={4} className="h-100">
             <div className="h-100 arrow-wrapper">
               <div className="counter">
-                <b>{activeSlide + 1}</b>/
-                <span>
-                  {sliderCategory.acf?.youtube_id
-                    ? posts.length + 1
-                    : posts.length}
-                </span>
+                <b>{activeSlide + 1}</b>/<span>{sliderCategory.acf?.youtube_id ? posts.length + 1 : posts.length}</span>
               </div>
-              <button
-                className="border-round custom-arrow prv"
-                onClick={previous}
-              >
+              <button className="border-round custom-arrow prv" onClick={previous}>
                 <LeftOutlined />
               </button>
               <button className="border-round custom-arrow nxt" onClick={next}>

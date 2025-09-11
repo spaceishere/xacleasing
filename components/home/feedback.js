@@ -51,7 +51,6 @@ const Feedback = () => {
     setLoading(true);
 
     try {
-      // Prepare GraphQL mutation variables (FieldValueInput format)
       const submissions = [
         {
           _id: "dvEwO18OPB3A7yLtYjJ91",
@@ -94,7 +93,6 @@ const Feedback = () => {
         cachedCustomerId: "5uoY53QC9Pwmrsq2W",
       });
 
-      // Call GraphQL mutation
       const response = await mutate(WIDGETS_SAVE_LEAD, {
         formId: "dvEwO18OPB3A7yLtYjJ91",
         submissions,
@@ -172,7 +170,7 @@ const Feedback = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" loading={loading} disabled={loading}>
+        <Button htmlType="submit" loading={loading} disabled={loading}>
           {loading ? t("Илгээж байна...") : t("Илгээх")} {!loading && <SendOutlined />}
         </Button>
       </Form.Item>

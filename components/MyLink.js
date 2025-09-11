@@ -40,14 +40,6 @@ const MyLink = ({ className, icon, title, type, slug, url, prefetch }) => {
 
   // Debug logging for vendor-related links
   if (title && (title.toLowerCase().includes("нийлүүлэгч") || title.toLowerCase().includes("хамтарч") || slug?.includes("хаслизингтэй"))) {
-    console.log("🔍 MyLink Debug:", {
-      title,
-      slug,
-      url,
-      type,
-      isHowToBecomeVendorLink,
-      willRedirectTo: isHowToBecomeVendorLink ? "/how-to-become-vendor" : "default",
-    });
   }
 
   // Check if this is a new-car-vendors link (exclude how-to-become cases)

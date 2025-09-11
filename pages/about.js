@@ -171,11 +171,12 @@ const About = ({ mainMenu, stickyMenu }) => {
     return null;
   };
 
-  const renderContent = (post) => {
+  const renderContent = (post, index) => {
     if (!post) return <div>No post data available</div>;
 
-    let first = post?.title === "Танилцуулга" ? "img" : "cont";
-    let sec = post?.title === "Танилцуулга" ? "cont" : "img";
+    // Alternate layout: even index (0, 2, 4...) = image left, odd index (1, 3, 5...) = image right
+    let first = index % 2 === 0 ? "img" : "cont";
+    let sec = index % 2 === 0 ? "cont" : "img";
 
     return (
       <Row justify="center" className="w-100" align="middle">
@@ -239,7 +240,7 @@ const About = ({ mainMenu, stickyMenu }) => {
           >
             {posts.slice(0, 2).map((post, index) => (
               <div key={post._id || index} className="component center">
-                {renderContent(post)}
+                {renderContent(post, index)}
                 {index === 0 && posts.length > 1 && <div className="icon-scroll" onClick={() => handlePageChange(1)}></div>}
               </div>
             ))}
