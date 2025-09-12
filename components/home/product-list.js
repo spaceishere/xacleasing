@@ -5,6 +5,44 @@ import Slider from "react-slick";
 import ProductItem from "../ProductItem";
 import useTranslation from "next-translate/useTranslation";
 
+// Static products data with proper links to leasing pages
+const staticProducts = [
+  {
+    id: "machinery-leasing",
+    title: { rendered: "МАШИН МЕХАНИЗМЫН ЛИЗИНГ" },
+    slug: "machinery-leasing",
+    excerpt: {
+      rendered: "Уул уурхай, зам барилга, ачаа тээврийн үйлчилгээнд ашиглагдах тоног төхөөрөмж, техник, тусгай зориулалтын машин механизмын лизинг",
+    },
+    link: "/machinery-leasing",
+    img: "/images/back.jpg",
+  },
+  {
+    id: "manufacturing-equipment-leasing",
+    title: { rendered: "ҮЙЛДВЭРЛЭЛИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ЛИЗИНГ" },
+    slug: "manufacturing-equipment-leasing",
+    excerpt: { rendered: "Үйлдвэрлэл, үйлчилгээний тоног төхөөрөмжийн хамгийн таатай нөхцөлтэй лизингийн үйлчилгээ" },
+    link: "/manufacturing-equipment-leasing",
+    img: "/images/back.jpg",
+  },
+  {
+    id: "medical-equipment-leasing",
+    title: { rendered: "ЭМНЭЛЭГИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ЛИЗИНГ" },
+    slug: "medical-equipment-leasing",
+    excerpt: { rendered: "Эмчилгээ, оношилгооны тоног төхөөрөмжийн хамгийн таатай нөхцөлтэй лизингийн үйлчилгээ" },
+    link: "/medical-equipment-leasing",
+    img: "/images/back.jpg",
+  },
+  {
+    id: "new-car-leasing",
+    title: { rendered: "ШИНЭ АВТОМАШИНЫ ЛИЗИНГ" },
+    slug: "new-car-leasing",
+    excerpt: { rendered: "Албан ёсны борлуулагч байгууллагуудаас шинэ автомашины хамгийн таатай нөхцөлтэй лизингийн үйлчилгээ" },
+    link: "/new-car-leasing",
+    img: "/images/back.jpg",
+  },
+];
+
 function ProductList({ products }) {
   const { t } = useTranslation("common");
 
@@ -23,33 +61,22 @@ function ProductList({ products }) {
     ],
   };
 
-  if (!products || products.length === 0) {
-    return (
-      <Row justify="center" className="w-100 relative" gutter={[48, 0]}>
-        <Col xs={22} sm={22} md={20} lg={18} xl={16}>
-          <div style={{ textAlign: "center", padding: "4rem 2rem" }}>
-            <h2 className="title pb-2 purple">{t("БҮТЭЭГДЭХҮҮН ҮЙЛЧИЛГЭЭ")}</h2>
-            <p style={{ fontSize: "1.1rem", opacity: 0.7, marginTop: "2rem" }}>
-              {t("Бидний бүтээгдэхүүн, үйлчилгээний мэдээлэл удахгүй энд харагдах болно")}
-            </p>
-          </div>
-        </Col>
-      </Row>
-    );
-  }
+  // Always use static products instead of WordPress data
+  const productsToShow = staticProducts;
 
   return (
     <Row justify="center" className="w-100 relative" gutter={[48, 0]}>
       <Col xs={22} sm={22} md={20} lg={18} xl={16}>
         <h2 className="title">{t("БҮТЭЭГДЭХҮҮН ҮЙЛЧИЛГЭЭ")}</h2>
         <Slider {...settings1}>
-          {products.map((product) => (
+          {productsToShow.map((product) => (
             <ProductItem
               key={product.id}
               title={product.title?.rendered}
-              img={getData(product._embedded, "image")}
+              img={product.img}
               slug={product.slug}
               descr={product.excerpt?.rendered || ""}
+              link={product.link}
             />
           ))}
         </Slider>
